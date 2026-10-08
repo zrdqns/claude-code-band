@@ -17,6 +17,6 @@ export type Last = { ms: number; usd: number | null } | null
 
 declare module 'claude-code' {
   interface PluginState {
-    franja: { place: Place; turn: Turn; last: Last }
+    band: { place: Place; turn: Turn; last: Last }
   }
 }

@@ -1,7 +1,7 @@
 {
-  "name": "franja",
-  "version": "1.1.0",
-  "description": "Franja sobre el prompt con modelo, rama y cambios (o carpeta), contexto, actividad del turno y límite de 5 h; el rombo late mientras hay un turno en curso",
+  "name": "band",
+  "version": "2.0.0",
+  "description": "Band above the prompt with model, branch and changes (or folder), context, turn activity and the 5-hour limit; the diamond pulses while a turn is running",
   "author": { "name": "Daniel" },
   "types": "./types/index.d.ts"
 }

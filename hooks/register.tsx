@@ -1,13 +1,13 @@
 import { atom, read, update } from 'claude-code'
 import type { EngineInterface, Register, Timer } from 'claude-code'
 
-const place = atom({ plugin: 'franja', key: 'place' } as const, {
+const place = atom({ plugin: 'band', key: 'place' } as const, {
   branch: null,
   changes: 0,
   folder: null,
 })
-const turn = atom({ plugin: 'franja', key: 'turn' } as const, null)
-const last = atom({ plugin: 'franja', key: 'last' } as const, null)
+const turn = atom({ plugin: 'band', key: 'turn' } as const, null)
+const last = atom({ plugin: 'band', key: 'last' } as const, null)
 
 // Cells of the context gauge.
 const CELLS = 8
@@ -94,7 +94,7 @@ const refresh = async ($: EngineInterface) => {
           )
           .catch(() => 0)
   const cwd = await $.session.cwd().catch(() => '')
-  const folder = SCRATCH.test(cwd) ? 'sin carpeta' : baseName(cwd) || null
+  const folder = SCRATCH.test(cwd) ? 'no folder' : baseName(cwd) || null
   await update($, place, () => ({ branch: name, changes, folder }))
 }
 
@@ -259,8 +259,8 @@ export const register: Register = on => {
             <Box flexShrink={0}>
               <Text dimColor>
                 {spent.usd !== null && spent.usd >= 0.01
-                  ? `último ${clock(spent.ms)} · $${spent.usd.toFixed(2)}`
-                  : `último ${clock(spent.ms)}`}
+                  ? `last ${clock(spent.ms)} · $${spent.usd.toFixed(2)}`
+                  : `last ${clock(spent.ms)}`}
               </Text>
             </Box>
           )}

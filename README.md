@@ -1,53 +1,53 @@
-# franja
+# band
 
-Mod para [Claude Code](https://claude.com/claude-code): una franja de una línea sobre el prompt con lo que conviene tener a la vista mientras se trabaja.
+A mod for [Claude Code](https://claude.com/claude-code): a one-line band above the prompt with what is worth keeping in sight while you work.
 
 ```
 ◆ opus-5-5  ⎇ main ±3  ▰▰▱▱▱▱▱▱ 24%          Edit register.tsx · 0:42   5h 38%
 ```
 
-## Qué muestra
+## What it shows
 
-| Segmento | Significado |
+| Segment | Meaning |
 | --- | --- |
-| `◆ opus-5-5` | Modelo de la sesión. El rombo late mientras hay un turno en curso. |
-| `⎇ main ±3` | Rama actual y archivos sin commitear. Fuera de un repositorio, `⌂ carpeta`. |
-| `▰▰▱▱▱▱▱▱ 24%` | Ventana de contexto usada. Amarillo entre 60 % y 85 %. |
-| `Edit register.tsx · 0:42` | Durante un turno: la última herramienta llamada y el cronómetro del turno. |
-| `último 1:12 · $0.25` | En reposo: duración y costo del último turno. |
-| `5h 38%` | Límite de uso de 5 horas. Amarillo desde 60 %, rojo desde 85 %. |
+| `◆ opus-5-5` | The session's model. The diamond pulses while a turn is running. |
+| `⎇ main ±3` | Current branch and uncommitted files. Outside a repository, `⌂ folder`. |
+| `▰▰▱▱▱▱▱▱ 24%` | Context window used. Yellow between 60% and 85%. |
+| `Edit register.tsx · 0:42` | During a turn: the last tool called and the turn's stopwatch. |
+| `last 1:12 · $0.25` | When idle: the last turn's length and cost. |
+| `5h 38%` | 5-hour usage limit. Yellow from 60%, red from 85%. |
 
-El lado izquierdo conserva su ancho; cuando un panel lateral estrecha la franja, cede primero la etiqueta de la herramienta.
+The left side keeps its width; when a side pane narrows the band, the tool's label gives way first.
 
-## Instalación
+## Installation
 
-En el prompt de una sesión de terminal:
+At the prompt of a terminal session:
 
 ```
-/plugin install franja --marketplace zrdqns/claude-code-franja
+/plugin install band --marketplace zrdqns/claude-code-band
 ```
 
-Responde `y` para añadir el marketplace y elige el alcance (el de usuario lo carga en todas las sesiones, también en las de la app de escritorio).
+Answer `y` to add the marketplace and choose the scope (the user scope loads it in every session, including the desktop app's).
 
-Para probarlo desde una copia local, sin instalarlo:
+To try it from a local copy, without installing it:
 
 ```bash
-claude --plugin-dir ./claude-code-franja
+claude --plugin-dir ./claude-code-band
 ```
 
-## Requisitos
+## Requirements
 
-- `git` en el `PATH` para el contador de cambios (`±N`). Sin él, la franja muestra la rama sin contador.
+- `git` on the `PATH` for the change counter (`±N`). Without it, the band shows the branch with no counter.
 
-## Desarrollo
+## Development
 
 ```bash
 claude plugin validate .
 claude plugin test .
 ```
 
-El módulo está en [`hooks/register.tsx`](hooks/register.tsx), su contrato de estado en [`types/index.d.ts`](types/index.d.ts) y los tests en [`tests/`](tests).
+The module is in [`hooks/register.tsx`](hooks/register.tsx), its state contract in [`types/index.d.ts`](types/index.d.ts) and the tests in [`tests/`](tests).
 
-## Licencia
+## License
 
 [MIT](LICENSE)

@@ -19,7 +19,7 @@ const SCRATCH =
 const world = (
   on: On,
   percent: number,
-  { head = 'ref: refs/heads/main\n' as string | null, cwd = 'C:\\Proyectos\\demo' } = {},
+  { head = 'ref: refs/heads/main\n' as string | null, cwd = 'C:\\Projects\\demo' } = {},
 ) => {
   const clock = mock.clock(on, { now: 1000000 })
   let usd = 1
@@ -68,7 +68,7 @@ const turn = ($: Engine, durationMs: number) =>
 
 const drawn = async ($: Engine, surface: 'terminal' | 'desktop', props = BAND) => {
   const band = await $.ui.mount({
-    plugin: 'franja',
+    plugin: 'band',
     surface,
     component: 'AbovePrompt',
     props,
@@ -80,7 +80,7 @@ const drawn = async ($: Engine, surface: 'terminal' | 'desktop', props = BAND) =
 }
 
 for (const surface of ['terminal', 'desktop'] as const) {
-  test(`en reposo en ${surface}: modelo, rama y cambios, contexto, último turno y límite`, async ($, on) => {
+  test(`idle on ${surface}: model, branch and changes, context, last turn and limit`, async ($, on) => {
     world(on, 25)
 
     // A long turn ends with no toast and no sound: nothing beneath answers them.
@@ -96,7 +96,7 @@ for (const surface of ['terminal', 'desktop'] as const) {
       '▰▰',
       '▱▱▱▱▱▱',
       '25%',
-      'último 0:45',
+      'last 0:45',
       '5h',
       '72%',
     ])
@@ -104,7 +104,7 @@ for (const surface of ['terminal', 'desktop'] as const) {
 }
 
 for (const surface of ['terminal', 'desktop'] as const) {
-  test(`sin repositorio en ${surface}, la carpeta ocupa el lugar de la rama`, async ($, on) => {
+  test(`with no repository on ${surface}, the folder takes the branch's place`, async ($, on) => {
     world(on, 25, { head: null })
 
     await turn($, 45000)
@@ -115,16 +115,16 @@ for (const surface of ['terminal', 'desktop'] as const) {
   })
 }
 
-test('una sesión sin carpeta lo dice en vez de nombrar la de trabajo', async ($, on) => {
+test('a session with no folder says so instead of naming its working one', async ($, on) => {
   world(on, 25, { head: null, cwd: SCRATCH })
 
   await turn($, 45000)
   const texts = await drawn($, 'desktop')
 
-  expect(texts.slice(2, 4)).toEqual(['⌂', 'sin carpeta'])
+  expect(texts.slice(2, 4)).toEqual(['⌂', 'no folder'])
 })
 
-test('el último turno lleva lo que costó', async ($, on) => {
+test('the last turn carries what it cost', async ($, on) => {
   const { spend } = world(on, 25)
 
   await $.turn.start({ text: '', turnId: 't1' })
@@ -132,20 +132,20 @@ test('el último turno lleva lo que costó', async ($, on) => {
   await turn($, 72000)
   const texts = await drawn($, 'terminal')
 
-  expect(texts).toContain('último 1:12 · $0.25')
+  expect(texts).toContain('last 1:12 · $0.25')
 })
 
 for (const surface of ['terminal', 'desktop'] as const) {
-  test(`mientras trabaja en ${surface}, el rombo late, el cronómetro corre y el medidor no se mueve`, async ($, on) => {
+  test(`while it works on ${surface}, the diamond pulses, the stopwatch runs and the gauge holds still`, async ($, on) => {
     const { clock } = world(on, 90)
 
     await $.turn.start({ text: '', turnId: 't1' })
     await $.tool.call({
       tool: 'Read',
-      file_path: 'C:\\Proyectos\\demo\\notas.md',
+      file_path: 'C:\\Projects\\demo\\notes.md',
     })
     const band = await $.ui.mount({
-      plugin: 'franja',
+      plugin: 'band',
       surface,
       component: 'AbovePrompt',
       props: { ...(BAND as object), isWorking: true } as never,
@@ -161,7 +161,7 @@ for (const surface of ['terminal', 'desktop'] as const) {
     expect(first).toContain('▰▰▰▰▰▰▰')
     expect(later).toContain('▰▰▰▰▰▰▰')
     expect(later).toContain('90%')
-    expect(first).toContain('Read notas.md')
+    expect(first).toContain('Read notes.md')
     expect(first).toContain('· 0:00')
     expect(later).toContain('· 0:06')
     expect(later.slice(-2)).toEqual(['5h', '72%'])
@@ -170,7 +170,7 @@ for (const surface of ['terminal', 'desktop'] as const) {
   })
 }
 
-test('antes de la primera herramienta solo corre el cronómetro', async ($, on) => {
+test('before the first tool only the stopwatch runs', async ($, on) => {
   world(on, 25)
 
   await $.turn.start({ text: '', turnId: 't1' })

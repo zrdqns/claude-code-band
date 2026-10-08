@@ -1,6 +1,6 @@
 {
-  "name": "claude-code-franja",
-  "description": "Franja sobre el prompt de Claude Code: modelo, rama y cambios, contexto, actividad del turno y límite de 5 h",
+  "name": "claude-code-band",
+  "description": "Band above the Claude Code prompt: model, branch and changes, context, turn activity and the 5-hour limit",
   "owner": { "name": "zrdqns" },
-  "plugins": [{ "name": "franja", "source": "./" }]
+  "plugins": [{ "name": "band", "source": "./" }]
 }
