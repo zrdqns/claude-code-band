@@ -1,0 +1,7 @@
+{
+  "name": "franja",
+  "version": "1.1.0",
+  "description": "Franja sobre el prompt con modelo, rama y cambios (o carpeta), contexto, actividad del turno y límite de 5 h; el rombo late mientras hay un turno en curso",
+  "author": { "name": "Daniel" },
+  "types": "./types/index.d.ts"
+}

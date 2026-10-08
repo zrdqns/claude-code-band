@@ -1,0 +1,6 @@
+{
+  "name": "claude-code-franja",
+  "description": "Franja sobre el prompt de Claude Code: modelo, rama y cambios, contexto, actividad del turno y límite de 5 h",
+  "owner": { "name": "zrdqns" },
+  "plugins": [{ "name": "franja", "source": "./" }]
+}
